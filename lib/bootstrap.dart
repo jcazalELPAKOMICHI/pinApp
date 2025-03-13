@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
-import 'dart:isolate';
 
-import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -45,22 +43,6 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
             ? HydratedStorageDirectory.web
             : HydratedStorageDirectory((await getTemporaryDirectory()).path),
   );
-
-  // PlatformDispatcher.instance.onError = (error, stack) {
-  //   getItInjector<Crashlytics>().recordError(error, stack);
-  //   return true;
-  // };
-
-  // Isolate.current.addErrorListener(
-  //   // ignore: inference_failure_on_untyped_parameter
-  //   RawReceivePort((it) async {
-  //     final errorAndStacktrace = it as List;
-  //     getItInjector<Crashlytics>().recordError(
-  //       errorAndStacktrace.first,
-  //       errorAndStacktrace.last as StackTrace,
-  //     );
-  //   }).sendPort,
-  // );
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
