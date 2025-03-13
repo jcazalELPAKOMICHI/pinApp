@@ -27,7 +27,7 @@ class _PinAppClient implements PinAppClient {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'post',
+            'posts',
             queryParameters: queryParameters,
             data: _data,
           )

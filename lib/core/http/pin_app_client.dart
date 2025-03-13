@@ -8,6 +8,6 @@ part 'pin_app_client.g.dart';
 abstract class PinAppClient {
   factory PinAppClient(Dio dio) = _PinAppClient;
 
-  @GET("post")
+  @GET("posts")
   Future<List<PostModel>> getPost();
 }
