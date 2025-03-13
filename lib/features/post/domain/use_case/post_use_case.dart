@@ -16,6 +16,23 @@ class PostUseCase {
         PostEntity(id: it.id, title: it.title, body: it.body, favorite: 0),
       );
     }
+    lisPostEntity.sort((a, b) => a.id.compareTo(b.id));
+
     return lisPostEntity;
+  }
+
+  List<PostEntity> updateLike(List<PostEntity> searchResult, int id) {
+    final nuevaLista = List<PostEntity>.from(searchResult);
+
+    final firstPost = nuevaLista.firstWhere((element) => element.id == id);
+    final count = firstPost.favorite! + 1;
+
+    final post = firstPost.copyWith(favorite: count);
+
+    nuevaLista.removeWhere((element) => element.id == post.id);
+    nuevaLista.add(post);
+
+    nuevaLista.sort((a, b) => a.id.compareTo(b.id));
+    return nuevaLista;
   }
 }

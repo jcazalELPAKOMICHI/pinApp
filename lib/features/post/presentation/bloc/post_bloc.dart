@@ -60,5 +60,13 @@ class PostBloc extends Bloc<PostEvent, PostState> {
 
       emit(state.copyWith(searchResult: searchResult));
     });
+    on<_UpdateFavorite>((event, emit) {
+      final list = useCase.updateLike(state.searchResult, event.idPost);
+      final post = list.firstWhere((element) => element.id == event.idPost);
+      emit(state.copyWith(searchResult: list, post: post));
+    });
+    on<_SelectPost>((event, emit) {
+      emit(state.copyWith(post: event.post));
+    });
   }
 }

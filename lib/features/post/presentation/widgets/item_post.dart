@@ -1,4 +1,6 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_app/core/routes/app_route_import.dart';
+import 'package:pin_app/features/post/presentation/bloc/post_bloc.dart';
 
 class ItemPost extends StatelessWidget {
   const ItemPost({required this.post, super.key});
@@ -70,6 +72,7 @@ class ItemPost extends StatelessWidget {
                     Navigator.of(
                       context,
                     ).pushNamed(PostDetailPage.routeName, arguments: post);
+                    context.read<PostBloc>().add(PostEvent.selectPost(post));
                   },
                   icon: const Icon(Icons.comment, color: Colors.blue),
 
