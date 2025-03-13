@@ -17,4 +17,4 @@ samples, guidance on mobile development, and a full API reference.
 
 # Video de demostración
 
-![Descripción](player/ios-video.mp4)
+![Descripción](player/ios-player.gif)
