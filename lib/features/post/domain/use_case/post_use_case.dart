@@ -12,7 +12,9 @@ class PostUseCase {
     final resp = await repository.getAllPost();
 
     for (var it in resp) {
-      lisPostEntity.add(PostEntity(id: it.id, title: it.title, body: it.body));
+      lisPostEntity.add(
+        PostEntity(id: it.id, title: it.title, body: it.body, favorite: 0),
+      );
     }
     return lisPostEntity;
   }

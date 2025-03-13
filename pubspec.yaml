@@ -46,6 +46,8 @@ dependencies:
   pigeon: ^24.2.2
   hydrated_bloc: ^10.0.0
   path_provider: ^2.1.5
+  app_bar_with_search_switch: ^1.8.6
+  skeletonizer: ^1.4.3
 
 dev_dependencies:
   flutter_test:

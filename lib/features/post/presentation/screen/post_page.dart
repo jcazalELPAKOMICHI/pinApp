@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_app/features/post/presentation/bloc/post_bloc.dart';
+import 'package:pin_app/features/post/presentation/widgets/item_post.dart';
 import 'package:pin_app/features/post/presentation/widgets/post_search.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class PostPage extends StatelessWidget {
   static const routeName = '/';
@@ -30,25 +32,40 @@ class __PostPageState extends State<_PostPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: PostSearch(),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: SizedBox(
           width: double.infinity,
           child: Column(
             children: [
-              PostSearch(),
-
               Expanded(
                 child: BlocBuilder<PostBloc, PostState>(
                   builder: (context, state) {
-                    return ListView.builder(
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Text(state.searchResult[index].title),
-                        );
-                      },
-                      itemCount: state.searchResult.length,
+                    return Skeletonizer(
+                      enabled: state.status == PostStatus.loading,
+                      child: RefreshIndicator(
+                        onRefresh:
+                            () async => context.read<PostBloc>().add(
+                              PostEvent.getAllPost(),
+                            ),
+                        child: ListView.separated(
+                          separatorBuilder:
+                              (context, index) => Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 12,
+                                ),
+                                child: Divider(
+                                  height: 0.1,
+                                  color: Colors.grey.withOpacity(0.5),
+                                ),
+                              ),
+                          itemBuilder: (context, index) {
+                            return ItemPost(post: state.searchResult[index]);
+                          },
+                          itemCount: state.searchResult.length,
+                        ),
+                      ),
                     );
                   },
                 ),

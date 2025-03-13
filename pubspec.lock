@@ -17,6 +17,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.3.0"
+  app_bar_with_search_switch:
+    dependency: "direct main"
+    description:
+      name: app_bar_with_search_switch
+      sha256: "31543bd5f485dbe03f108c3558c0cb16feb885458f0173002985f3af6395d12c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.8.6"
   args:
     dependency: transitive
     description:
@@ -651,6 +659,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.0"
+  skeletonizer:
+    dependency: "direct main"
+    description:
+      name: skeletonizer
+      sha256: "0dcacc51c144af4edaf37672072156f49e47036becbc394d7c51850c5c1e884b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.4.3"
   sky_engine:
     dependency: transitive
     description: flutter

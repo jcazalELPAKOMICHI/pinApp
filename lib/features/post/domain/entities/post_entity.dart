@@ -8,5 +8,6 @@ abstract class PostEntity with _$PostEntity {
     required int id,
     required String title,
     required String body,
+    @Default(0) int? favorite,
   }) = _PostEntity;
 }
