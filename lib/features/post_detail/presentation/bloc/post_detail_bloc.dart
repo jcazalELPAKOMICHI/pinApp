@@ -19,7 +19,7 @@ class PostDetailBloc extends Bloc<PostDetailEvent, PostDetailState> {
           response: useCase.loadingMock,
         ),
       );
-
+      await Future.delayed(Duration(milliseconds: 500));
       final reponse = await useCase.getComments(event.id);
 
       emit(state.copyWith(status: PostDetailStatus.success, response: reponse));
