@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:pin_app/features/post/domain/entities/post_entity.dart';
+import 'package:pin_app/core/routes/app_route_import.dart';
 
 class ItemPost extends StatelessWidget {
   const ItemPost({required this.post, super.key});
@@ -67,7 +66,11 @@ class ItemPost extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 child: TextButton.icon(
                   style: TextButton.styleFrom(padding: EdgeInsets.all(0)),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(
+                      context,
+                    ).pushNamed(PostDetailPage.routeName, arguments: post);
+                  },
                   icon: const Icon(Icons.comment, color: Colors.blue),
 
                   label: const Text(

@@ -29,15 +29,20 @@ class PostBloc extends Bloc<PostEvent, PostState> {
         ),
       );
       await Future.delayed(Duration(milliseconds: 500));
-      final response = await useCase.getAllPost();
-
-      emit(
-        state.copyWith(
-          status: PostStatus.success,
-          response: response,
-          searchResult: response,
-        ),
-      );
+      await useCase
+          .getAllPost()
+          .then((it) {
+            emit(
+              state.copyWith(
+                status: PostStatus.success,
+                response: it,
+                searchResult: it,
+              ),
+            );
+          })
+          .catchError((error) {
+            print(error.toString());
+          });
     });
     on<_SearchList>((event, emit) async {
       final searchResult =

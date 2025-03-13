@@ -17,6 +17,8 @@ import '../../features/post/data/repositories/remote_repository.dart' as _i728;
 import '../../features/post/domain/repositories/post_repository.dart' as _i786;
 import '../../features/post/domain/use_case/post_use_case.dart' as _i385;
 import '../../features/post/presentation/bloc/post_bloc.dart' as _i896;
+import '../../features/post_detail/presentation/bloc/post_detail_bloc.dart'
+    as _i213;
 import '../http/ic_config.dart' as _i836;
 import '../http/pin_app_client.dart' as _i238;
 import '../module/client_module.dart' as _i711;
@@ -31,6 +33,7 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final dioModule = _$DioModule();
     final clientModule = _$ClientModule();
+    gh.factory<_i213.PostDetailBloc>(() => _i213.PostDetailBloc());
     gh.factory<_i836.IConfig>(() => _i836.AppConfig());
     gh.singleton<_i361.Dio>(() => dioModule.dio(gh<_i836.IConfig>()));
     gh.singleton<_i238.PinAppClient>(
