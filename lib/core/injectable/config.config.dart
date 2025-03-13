@@ -17,6 +17,12 @@ import '../../features/post/data/repositories/remote_repository.dart' as _i728;
 import '../../features/post/domain/repositories/post_repository.dart' as _i786;
 import '../../features/post/domain/use_case/post_use_case.dart' as _i385;
 import '../../features/post/presentation/bloc/post_bloc.dart' as _i896;
+import '../../features/post_detail/data/repository/post_detail_repository_iml.dart'
+    as _i723;
+import '../../features/post_detail/domain/repository/post_detail_repository.dart'
+    as _i145;
+import '../../features/post_detail/domain/use_case/post_detail_use_case.dart'
+    as _i235;
 import '../../features/post_detail/presentation/bloc/post_detail_bloc.dart'
     as _i213;
 import '../http/ic_config.dart' as _i836;
@@ -33,9 +39,18 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final dioModule = _$DioModule();
     final clientModule = _$ClientModule();
-    gh.factory<_i213.PostDetailBloc>(() => _i213.PostDetailBloc());
     gh.factory<_i836.IConfig>(() => _i836.AppConfig());
     gh.singleton<_i361.Dio>(() => dioModule.dio(gh<_i836.IConfig>()));
+    gh.factory<_i145.PostDetailRepository>(
+      () => _i723.PostDetailRepositoryIml(dio: gh<_i361.Dio>()),
+    );
+    gh.factory<_i235.PostDetailUseCase>(
+      () =>
+          _i235.PostDetailUseCase(repository: gh<_i145.PostDetailRepository>()),
+    );
+    gh.factory<_i213.PostDetailBloc>(
+      () => _i213.PostDetailBloc(useCase: gh<_i235.PostDetailUseCase>()),
+    );
     gh.singleton<_i238.PinAppClient>(
       () => clientModule.pinAppClient(gh<_i361.Dio>()),
     );

@@ -2,23 +2,18 @@ import 'package:pigeon/pigeon.dart';
 
 @ConfigurePigeon(
   PigeonOptions(
-    dartOut: 'llib/core/pigeon/post_detail_api.g.dart',
+    dartOut: 'lib/core/pigeon/post_detail_api.g.dart',
     dartOptions: DartOptions(),
-    kotlinOut:
-        'android/app/src/main/kotlin/dev/flutter/pigeon_test/PostDetail.g.kt',
-    kotlinOptions: KotlinOptions(),
-    swiftOut: 'ios/Runner/PostDetail.g.swift',
-    javaOut: 'android/app/src/main/java/io/flutter/plugins/PostDetail.java',
+
+    swiftOut: 'ios/Runner/PostDetailApi.g.swift',
+    javaOut: 'android/app/src/main/java/io/flutter/plugins/PostDetailApi.java',
+
     javaOptions: JavaOptions(),
     swiftOptions: SwiftOptions(),
+    dartPackageName: 'pin_app',
+    objcOptions: ObjcOptions(prefix: 'PGN'),
   ),
 )
-class CommentRequest {
-  final String idPost;
-
-  CommentRequest({required this.idPost});
-}
-
 class PostDetail {
   final int postId;
   final int id;
@@ -26,23 +21,11 @@ class PostDetail {
   final String email;
   final String body;
 
-  PostDetail({
-    required this.postId,
-    required this.id,
-    required this.name,
-    required this.email,
-    required this.body,
-  });
-}
-
-class CommentResponse {
-  final List<PostDetail> results;
-
-  CommentResponse({required this.results});
+  PostDetail(this.postId, this.id, this.name, this.email, this.body);
 }
 
 @HostApi()
-abstract class PostDetailApi {
+abstract class DetailApi {
   @async
-  CommentResponse search(CommentRequest request);
+  List<PostDetail> search(String baseUrl, String endpoint, int postId);
 }

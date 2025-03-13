@@ -15,27 +15,6 @@ PlatformException _createConnectionError(String channelName) {
   );
 }
 
-class CommentRequest {
-  CommentRequest({
-    required this.idPost,
-  });
-
-  String idPost;
-
-  Object encode() {
-    return <Object?>[
-      idPost,
-    ];
-  }
-
-  static CommentRequest decode(Object result) {
-    result as List<Object?>;
-    return CommentRequest(
-      idPost: result[0]! as String,
-    );
-  }
-}
-
 class PostDetail {
   PostDetail({
     required this.postId,
@@ -77,27 +56,6 @@ class PostDetail {
   }
 }
 
-class CommentResponse {
-  CommentResponse({
-    required this.results,
-  });
-
-  List<PostDetail> results;
-
-  Object encode() {
-    return <Object?>[
-      results,
-    ];
-  }
-
-  static CommentResponse decode(Object result) {
-    result as List<Object?>;
-    return CommentResponse(
-      results: (result[0] as List<Object?>?)!.cast<PostDetail>(),
-    );
-  }
-}
-
 
 class _PigeonCodec extends StandardMessageCodec {
   const _PigeonCodec();
@@ -106,14 +64,8 @@ class _PigeonCodec extends StandardMessageCodec {
     if (value is int) {
       buffer.putUint8(4);
       buffer.putInt64(value);
-    }    else if (value is CommentRequest) {
-      buffer.putUint8(129);
-      writeValue(buffer, value.encode());
     }    else if (value is PostDetail) {
-      buffer.putUint8(130);
-      writeValue(buffer, value.encode());
-    }    else if (value is CommentResponse) {
-      buffer.putUint8(131);
+      buffer.putUint8(129);
       writeValue(buffer, value.encode());
     } else {
       super.writeValue(buffer, value);
@@ -124,22 +76,18 @@ class _PigeonCodec extends StandardMessageCodec {
   Object? readValueOfType(int type, ReadBuffer buffer) {
     switch (type) {
       case 129: 
-        return CommentRequest.decode(readValue(buffer)!);
-      case 130: 
         return PostDetail.decode(readValue(buffer)!);
-      case 131: 
-        return CommentResponse.decode(readValue(buffer)!);
       default:
         return super.readValueOfType(type, buffer);
     }
   }
 }
 
-class PostDetailApi {
-  /// Constructor for [PostDetailApi].  The [binaryMessenger] named argument is
+class DetailApi {
+  /// Constructor for [DetailApi].  The [binaryMessenger] named argument is
   /// available for dependency injection.  If it is left null, the default
   /// BinaryMessenger will be used which routes to the host platform.
-  PostDetailApi({BinaryMessenger? binaryMessenger, String messageChannelSuffix = ''})
+  DetailApi({BinaryMessenger? binaryMessenger, String messageChannelSuffix = ''})
       : pigeonVar_binaryMessenger = binaryMessenger,
         pigeonVar_messageChannelSuffix = messageChannelSuffix.isNotEmpty ? '.$messageChannelSuffix' : '';
   final BinaryMessenger? pigeonVar_binaryMessenger;
@@ -148,14 +96,14 @@ class PostDetailApi {
 
   final String pigeonVar_messageChannelSuffix;
 
-  Future<CommentResponse> search(CommentRequest request) async {
-    final String pigeonVar_channelName = 'dev.flutter.pigeon.pin_app.PostDetailApi.search$pigeonVar_messageChannelSuffix';
+  Future<List<PostDetail>> search(String baseUrl, String endpoint, int postId) async {
+    final String pigeonVar_channelName = 'dev.flutter.pigeon.pin_app.DetailApi.search$pigeonVar_messageChannelSuffix';
     final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
       pigeonVar_channelName,
       pigeonChannelCodec,
       binaryMessenger: pigeonVar_binaryMessenger,
     );
-    final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel.send(<Object?>[request]);
+    final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel.send(<Object?>[baseUrl, endpoint, postId]);
     final List<Object?>? pigeonVar_replyList =
         await pigeonVar_sendFuture as List<Object?>?;
     if (pigeonVar_replyList == null) {
@@ -172,7 +120,7 @@ class PostDetailApi {
         message: 'Host platform returned null value for non-null return value.',
       );
     } else {
-      return (pigeonVar_replyList[0] as CommentResponse?)!;
+      return (pigeonVar_replyList[0] as List<Object?>?)!.cast<PostDetail>();
     }
   }
 }

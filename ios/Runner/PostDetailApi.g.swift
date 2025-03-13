@@ -65,26 +65,6 @@ private func nilOrValue<T>(_ value: Any?) -> T? {
 }
 
 /// Generated class from Pigeon that represents data sent in messages.
-struct CommentRequest {
-  var idPost: String
-
-
-  // swift-format-ignore: AlwaysUseLowerCamelCase
-  static func fromList(_ pigeonVar_list: [Any?]) -> CommentRequest? {
-    let idPost = pigeonVar_list[0] as! String
-
-    return CommentRequest(
-      idPost: idPost
-    )
-  }
-  func toList() -> [Any?] {
-    return [
-      idPost
-    ]
-  }
-}
-
-/// Generated class from Pigeon that represents data sent in messages.
 struct PostDetail {
   var postId: Int64
   var id: Int64
@@ -120,51 +100,21 @@ struct PostDetail {
   }
 }
 
-/// Generated class from Pigeon that represents data sent in messages.
-struct CommentResponse {
-  var results: [PostDetail]
-
-
-  // swift-format-ignore: AlwaysUseLowerCamelCase
-  static func fromList(_ pigeonVar_list: [Any?]) -> CommentResponse? {
-    let results = pigeonVar_list[0] as! [PostDetail]
-
-    return CommentResponse(
-      results: results
-    )
-  }
-  func toList() -> [Any?] {
-    return [
-      results
-    ]
-  }
-}
-
-private class PostDetailPigeonCodecReader: FlutterStandardReader {
+private class PostDetailApiPigeonCodecReader: FlutterStandardReader {
   override func readValue(ofType type: UInt8) -> Any? {
     switch type {
     case 129:
-      return CommentRequest.fromList(self.readValue() as! [Any?])
-    case 130:
       return PostDetail.fromList(self.readValue() as! [Any?])
-    case 131:
-      return CommentResponse.fromList(self.readValue() as! [Any?])
     default:
       return super.readValue(ofType: type)
     }
   }
 }
 
-private class PostDetailPigeonCodecWriter: FlutterStandardWriter {
+private class PostDetailApiPigeonCodecWriter: FlutterStandardWriter {
   override func writeValue(_ value: Any) {
-    if let value = value as? CommentRequest {
+    if let value = value as? PostDetail {
       super.writeByte(129)
-      super.writeValue(value.toList())
-    } else if let value = value as? PostDetail {
-      super.writeByte(130)
-      super.writeValue(value.toList())
-    } else if let value = value as? CommentResponse {
-      super.writeByte(131)
       super.writeValue(value.toList())
     } else {
       super.writeValue(value)
@@ -172,38 +122,40 @@ private class PostDetailPigeonCodecWriter: FlutterStandardWriter {
   }
 }
 
-private class PostDetailPigeonCodecReaderWriter: FlutterStandardReaderWriter {
+private class PostDetailApiPigeonCodecReaderWriter: FlutterStandardReaderWriter {
   override func reader(with data: Data) -> FlutterStandardReader {
-    return PostDetailPigeonCodecReader(data: data)
+    return PostDetailApiPigeonCodecReader(data: data)
   }
 
   override func writer(with data: NSMutableData) -> FlutterStandardWriter {
-    return PostDetailPigeonCodecWriter(data: data)
+    return PostDetailApiPigeonCodecWriter(data: data)
   }
 }
 
-class PostDetailPigeonCodec: FlutterStandardMessageCodec, @unchecked Sendable {
-  static let shared = PostDetailPigeonCodec(readerWriter: PostDetailPigeonCodecReaderWriter())
+class PostDetailApiPigeonCodec: FlutterStandardMessageCodec, @unchecked Sendable {
+  static let shared = PostDetailApiPigeonCodec(readerWriter: PostDetailApiPigeonCodecReaderWriter())
 }
 
 
 /// Generated protocol from Pigeon that represents a handler of messages from Flutter.
-protocol PostDetailApi {
-  func search(request: CommentRequest, completion: @escaping (Result<CommentResponse, Error>) -> Void)
+protocol DetailApi {
+  func search(baseUrl: String, endpoint: String, postId: Int64, completion: @escaping (Result<[PostDetail], Error>) -> Void)
 }
 
 /// Generated setup class from Pigeon to handle messages through the `binaryMessenger`.
-class PostDetailApiSetup {
-  static var codec: FlutterStandardMessageCodec { PostDetailPigeonCodec.shared }
-  /// Sets up an instance of `PostDetailApi` to handle messages through the `binaryMessenger`.
-  static func setUp(binaryMessenger: FlutterBinaryMessenger, api: PostDetailApi?, messageChannelSuffix: String = "") {
+class DetailApiSetup {
+  static var codec: FlutterStandardMessageCodec { PostDetailApiPigeonCodec.shared }
+  /// Sets up an instance of `DetailApi` to handle messages through the `binaryMessenger`.
+  static func setUp(binaryMessenger: FlutterBinaryMessenger, api: DetailApi?, messageChannelSuffix: String = "") {
     let channelSuffix = messageChannelSuffix.count > 0 ? ".\(messageChannelSuffix)" : ""
-    let searchChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.pin_app.PostDetailApi.search\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    let searchChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.pin_app.DetailApi.search\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       searchChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
-        let requestArg = args[0] as! CommentRequest
-        api.search(request: requestArg) { result in
+        let baseUrlArg = args[0] as! String
+        let endpointArg = args[1] as! String
+        let postIdArg = args[2] as! Int64
+        api.search(baseUrl: baseUrlArg, endpoint: endpointArg, postId: postIdArg) { result in
           switch result {
           case .success(let res):
             reply(wrapResult(res))

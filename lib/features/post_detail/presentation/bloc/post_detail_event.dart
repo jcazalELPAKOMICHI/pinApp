@@ -1,5 +1,6 @@
 part of 'post_detail_bloc.dart';
 
 @freezed
-class PostDetailEvent with _$PostDetailEvent {
+abstract class PostDetailEvent with _$PostDetailEvent {
+  const factory PostDetailEvent.getComments(int id) = _GetComments;
 }
