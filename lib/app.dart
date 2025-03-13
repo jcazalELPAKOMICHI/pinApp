@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pin_app/core/extensions/theme_extension.dart';
 import 'package:pin_app/core/injectable/config.dart';
 import 'package:pin_app/core/routes/app_route.dart';
+import 'package:pin_app/core/theme/bloc/theme_bloc.dart';
+import 'package:pin_app/core/theme/theme.dart';
 import 'package:pin_app/features/post/presentation/bloc/post_bloc.dart';
 import 'package:pin_app/features/post_detail/presentation/bloc/post_detail_bloc.dart';
 
@@ -14,12 +17,20 @@ class App extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => getIt.get<PostBloc>()),
         BlocProvider(create: (context) => getIt.get<PostDetailBloc>()),
+        BlocProvider(create: (context) => getIt.get<ThemeBloc>()),
       ],
-      child: MaterialApp(
-        title: 'pinApp',
-        debugShowCheckedModeBanner: false,
-        onGenerateRoute: AppRoute.onGenerateRoute,
-        initialRoute: '/',
+      child: BlocBuilder<ThemeBloc, ThemeState>(
+        builder: (context, state) {
+          return MaterialApp(
+            title: 'pinApp',
+            debugShowCheckedModeBanner: false,
+            theme: state.isDarkMode ? AppThemes.darkMode : AppThemes.lightMode,
+            themeMode: context.isDarkModeW ? ThemeMode.dark : ThemeMode.light,
+            darkTheme: AppThemes.darkMode,
+            onGenerateRoute: AppRoute.onGenerateRoute,
+            initialRoute: '/',
+          );
+        },
       ),
     );
   }

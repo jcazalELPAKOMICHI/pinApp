@@ -29,6 +29,7 @@ import '../http/ic_config.dart' as _i836;
 import '../http/pin_app_client.dart' as _i238;
 import '../module/client_module.dart' as _i711;
 import '../module/dio_module.dart' as _i545;
+import '../theme/bloc/theme_bloc.dart' as _i279;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -39,6 +40,7 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final dioModule = _$DioModule();
     final clientModule = _$ClientModule();
+    gh.factory<_i279.ThemeBloc>(() => _i279.ThemeBloc());
     gh.factory<_i836.IConfig>(() => _i836.AppConfig());
     gh.singleton<_i361.Dio>(() => dioModule.dio(gh<_i836.IConfig>()));
     gh.factory<_i145.PostDetailRepository>(
