@@ -41,6 +41,8 @@ class __PostDetailPageState extends State<_PostDetailPage> {
         centerTitle: true,
         backgroundColor: Color(0xff2F315A),
         foregroundColor: Colors.white,
+        forceMaterialTransparency: false,
+        scrolledUnderElevation: 0,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
