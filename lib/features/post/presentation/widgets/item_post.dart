@@ -1,14 +1,18 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pin_app/core/extensions/theme_extension.dart';
 import 'package:pin_app/core/routes/app_route_import.dart';
+import 'package:pin_app/core/widgets/picture_dialog.dart';
 import 'package:pin_app/core/widgets/readmore.dart';
 import 'package:pin_app/features/post/presentation/bloc/post_bloc.dart';
 
 class ItemPost extends StatelessWidget {
   const ItemPost({required this.post, super.key});
   final PostEntity post;
-
   @override
   Widget build(BuildContext context) {
+    final imageURL =
+        'https://media.istockphoto.com/id/183285756/photo/waiting.jpg?s=612x612&w=0&k=20&c=SD1vv6goaFvQZo9ojhHqJpZ8vpLUVYxud5EBLMgSMlI=';
+
     return Column(
       mainAxisSize: MainAxisSize.min,
 
@@ -24,9 +28,18 @@ class ItemPost extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CircleAvatar(
-                    backgroundImage: NetworkImage(
-                      'https://media.istockphoto.com/id/183285756/photo/waiting.jpg?s=612x612&w=0&k=20&c=SD1vv6goaFvQZo9ojhHqJpZ8vpLUVYxud5EBLMgSMlI=',
+                  GestureDetector(
+                    onTap:
+                        () =>
+                            PictureDialog.showPictureDialog(context, imageURL),
+                    child: CircleAvatar(
+                      radius: 21,
+                      backgroundColor:
+                          context.isDarkModeR ? Colors.white : Colors.black,
+                      child: CircleAvatar(
+                        backgroundImage: NetworkImage(imageURL),
+                        radius: 20,
+                      ),
                     ),
                   ),
                   SizedBox(width: 8),
