@@ -15,30 +15,61 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ThemeEvent {
 
-
+ bool get isDarkMode;
+/// Create a copy of ThemeEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ThemeEventCopyWith<ThemeEvent> get copyWith => _$ThemeEventCopyWithImpl<ThemeEvent>(this as ThemeEvent, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ThemeEvent);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ThemeEvent&&(identical(other.isDarkMode, isDarkMode) || other.isDarkMode == isDarkMode));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,isDarkMode);
 
 @override
 String toString() {
-  return 'ThemeEvent()';
+  return 'ThemeEvent(isDarkMode: $isDarkMode)';
 }
 
 
 }
 
 /// @nodoc
-class $ThemeEventCopyWith<$Res>  {
-$ThemeEventCopyWith(ThemeEvent _, $Res Function(ThemeEvent) __);
+abstract mixin class $ThemeEventCopyWith<$Res>  {
+  factory $ThemeEventCopyWith(ThemeEvent value, $Res Function(ThemeEvent) _then) = _$ThemeEventCopyWithImpl;
+@useResult
+$Res call({
+ bool isDarkMode
+});
+
+
+
+
+}
+/// @nodoc
+class _$ThemeEventCopyWithImpl<$Res>
+    implements $ThemeEventCopyWith<$Res> {
+  _$ThemeEventCopyWithImpl(this._self, this._then);
+
+  final ThemeEvent _self;
+  final $Res Function(ThemeEvent) _then;
+
+/// Create a copy of ThemeEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? isDarkMode = null,}) {
+  return _then(_self.copyWith(
+isDarkMode: null == isDarkMode ? _self.isDarkMode : isDarkMode // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
 }
 
 
@@ -46,65 +77,67 @@ $ThemeEventCopyWith(ThemeEvent _, $Res Function(ThemeEvent) __);
 
 
 class _SwitchDarkMode implements ThemeEvent {
-  const _SwitchDarkMode();
+  const _SwitchDarkMode(this.isDarkMode);
   
 
+@override final  bool isDarkMode;
 
-
+/// Create a copy of ThemeEvent
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SwitchDarkModeCopyWith<_SwitchDarkMode> get copyWith => __$SwitchDarkModeCopyWithImpl<_SwitchDarkMode>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SwitchDarkMode);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SwitchDarkMode&&(identical(other.isDarkMode, isDarkMode) || other.isDarkMode == isDarkMode));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,isDarkMode);
 
 @override
 String toString() {
-  return 'ThemeEvent.switchDarkMode()';
+  return 'ThemeEvent.switchDarkMode(isDarkMode: $isDarkMode)';
 }
 
 
 }
-
-
-
 
 /// @nodoc
+abstract mixin class _$SwitchDarkModeCopyWith<$Res> implements $ThemeEventCopyWith<$Res> {
+  factory _$SwitchDarkModeCopyWith(_SwitchDarkMode value, $Res Function(_SwitchDarkMode) _then) = __$SwitchDarkModeCopyWithImpl;
+@override @useResult
+$Res call({
+ bool isDarkMode
+});
 
 
-class _SwitchLightMode implements ThemeEvent {
-  const _SwitchLightMode();
-  
-
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SwitchLightMode);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'ThemeEvent.switchLightMode()';
-}
 
 
 }
+/// @nodoc
+class __$SwitchDarkModeCopyWithImpl<$Res>
+    implements _$SwitchDarkModeCopyWith<$Res> {
+  __$SwitchDarkModeCopyWithImpl(this._self, this._then);
+
+  final _SwitchDarkMode _self;
+  final $Res Function(_SwitchDarkMode) _then;
+
+/// Create a copy of ThemeEvent
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? isDarkMode = null,}) {
+  return _then(_SwitchDarkMode(
+null == isDarkMode ? _self.isDarkMode : isDarkMode // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
 
 
-
+}
 
 /// @nodoc
 mixin _$ThemeState {

@@ -11,10 +11,7 @@ part 'theme_bloc.freezed.dart';
 class ThemeBloc extends HydratedBloc<ThemeEvent, ThemeState> {
   ThemeBloc() : super(ThemeState.initial()) {
     on<_SwitchDarkMode>((event, emit) async {
-      emit(state.copyWith(isDarkMode: true));
-    });
-    on<_SwitchLightMode>((event, emit) async {
-      emit(state.copyWith(isDarkMode: false));
+      emit(state.copyWith(isDarkMode: !event.isDarkMode));
     });
   }
 

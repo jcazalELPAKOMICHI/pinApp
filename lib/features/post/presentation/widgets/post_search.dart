@@ -50,7 +50,7 @@ class PostSearch extends StatelessWidget implements PreferredSizeWidget {
               forceMaterialTransparency: false,
               scrolledUnderElevation: 0,
               leading: BlocBuilder<ThemeBloc, ThemeState>(
-                builder: (context, state) {
+                builder: (blocContext, state) {
                   return ThemeSwitcher.withTheme(
                     builder:
                         (context, switcher, theme) => IconButton(
@@ -61,15 +61,9 @@ class PostSearch extends StatelessWidget implements PreferredSizeWidget {
                                       ? AppThemes.darkMode
                                       : AppThemes.lightMode,
                             );
-                            if (theme.brightness == Brightness.light) {
-                              context.read<ThemeBloc>().add(
-                                const ThemeEvent.switchLightMode(),
-                              );
-                            } else {
-                              context.read<ThemeBloc>().add(
-                                const ThemeEvent.switchDarkMode(),
-                              );
-                            }
+                            blocContext.read<ThemeBloc>().add(
+                              ThemeEvent.switchDarkMode(state.isDarkMode),
+                            );
                           },
                           icon: Icon(
                             theme.brightness == Brightness.light
