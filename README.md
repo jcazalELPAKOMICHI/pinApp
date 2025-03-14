@@ -2,9 +2,25 @@
 
 Aplicación Flutter desarrollada como parte del Challenge Técnico.
 
+## Que es la aplicación
+
+pinApp es una aplicación de posts, el cual se encarga de mostrar publicaciones y comentarios de la publicación.
+
+### Como funciona
+
+Al entrar a la pantalla se muestra el listado de publicaciones realizada por la persona, si la publicación sobre pasa los 100 caracteres, la misma se reduce con una opción de ver mas o ver menos, a modo de acortar la visualización en pantalla.
+
+En la parte superior se encuentra el buscador o filtro de publicaciones para poder mejorar la gestión y visualización del post.
+
+Al darle ver comentarios se puede observar los comentarios de los posts, con un contador de comentarios y una opción para poder darle like a la publicación.
+
+La aplicación tiene la opción de poder cambiar de light o dark mode para mayor comodidad visual de la aplicación.
+
 ## Tabla de Contenidos
 
 - [pinApp](#pinapp)
+  - [Que es la aplicación](#que-es-la-aplicación)
+    - [Como funciona](#como-funciona)
   - [Tabla de Contenidos](#tabla-de-contenidos)
   - [Estructura del Proyecto](#estructura-del-proyecto)
   - [Feature Guidelines 🤸‍♀️](#feature-guidelines-️)
