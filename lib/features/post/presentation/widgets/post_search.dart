@@ -1,7 +1,9 @@
+import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:app_bar_with_search_switch/app_bar_with_search_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_app/core/theme/bloc/theme_bloc.dart';
+import 'package:pin_app/core/theme/theme.dart';
 import 'package:pin_app/features/post/presentation/bloc/post_bloc.dart';
 
 class PostSearch extends StatelessWidget implements PreferredSizeWidget {
@@ -49,21 +51,32 @@ class PostSearch extends StatelessWidget implements PreferredSizeWidget {
               scrolledUnderElevation: 0,
               leading: BlocBuilder<ThemeBloc, ThemeState>(
                 builder: (context, state) {
-                  return IconButton(
-                    onPressed: () {
-                      if (state.isDarkMode) {
-                        context.read<ThemeBloc>().add(
-                          const ThemeEvent.switchLightMode(),
-                        );
-                      } else {
-                        context.read<ThemeBloc>().add(
-                          const ThemeEvent.switchDarkMode(),
-                        );
-                      }
-                    },
-                    icon: Icon(
-                      !state.isDarkMode ? Icons.dark_mode : Icons.light_mode,
-                    ),
+                  return ThemeSwitcher.withTheme(
+                    builder:
+                        (_, switcher, theme) => IconButton(
+                          onPressed: () {
+                            switcher.changeTheme(
+                              theme:
+                                  !state.isDarkMode
+                                      ? AppThemes.darkMode
+                                      : AppThemes.lightMode,
+                            );
+                            if (state.isDarkMode) {
+                              context.read<ThemeBloc>().add(
+                                const ThemeEvent.switchLightMode(),
+                              );
+                            } else {
+                              context.read<ThemeBloc>().add(
+                                const ThemeEvent.switchDarkMode(),
+                              );
+                            }
+                          },
+                          icon: Icon(
+                            !state.isDarkMode
+                                ? Icons.dark_mode
+                                : Icons.light_mode,
+                          ),
+                        ),
                   );
                 },
               ),

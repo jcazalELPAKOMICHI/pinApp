@@ -1,3 +1,4 @@
+import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_app/features/post/presentation/bloc/post_bloc.dart';
@@ -31,46 +32,48 @@ class __PostPageState extends State<_PostPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PostSearch(),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: SizedBox(
-          width: double.infinity,
-          child: Column(
-            children: [
-              Expanded(
-                child: BlocBuilder<PostBloc, PostState>(
-                  builder: (context, state) {
-                    return Skeletonizer(
-                      enabled: state.status == PostStatus.loading,
-                      child: RefreshIndicator(
-                        onRefresh:
-                            () async => context.read<PostBloc>().add(
-                              PostEvent.getAllPost(),
-                            ),
-                        child: ListView.separated(
-                          separatorBuilder:
-                              (context, index) => Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 12,
-                                ),
-                                child: Divider(
-                                  height: 0.1,
-                                  color: Colors.grey.withOpacity(0.5),
-                                ),
+    return ThemeSwitchingArea(
+      child: Scaffold(
+        appBar: PostSearch(),
+        body: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: SizedBox(
+            width: double.infinity,
+            child: Column(
+              children: [
+                Expanded(
+                  child: BlocBuilder<PostBloc, PostState>(
+                    builder: (context, state) {
+                      return Skeletonizer(
+                        enabled: state.status == PostStatus.loading,
+                        child: RefreshIndicator(
+                          onRefresh:
+                              () async => context.read<PostBloc>().add(
+                                PostEvent.getAllPost(),
                               ),
-                          itemBuilder: (context, index) {
-                            return ItemPost(post: state.searchResult[index]);
-                          },
-                          itemCount: state.searchResult.length,
+                          child: ListView.separated(
+                            separatorBuilder:
+                                (context, index) => Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 12,
+                                  ),
+                                  child: Divider(
+                                    height: 0.1,
+                                    color: Colors.grey.withOpacity(0.5),
+                                  ),
+                                ),
+                            itemBuilder: (context, index) {
+                              return ItemPost(post: state.searchResult[index]);
+                            },
+                            itemCount: state.searchResult.length,
+                          ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
