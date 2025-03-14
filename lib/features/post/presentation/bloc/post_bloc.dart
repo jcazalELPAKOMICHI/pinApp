@@ -13,19 +13,11 @@ class PostBloc extends Bloc<PostEvent, PostState> {
   final PostUseCase useCase;
   PostBloc({required this.useCase}) : super(PostState.initial()) {
     on<_GetAllPost>((event, emit) async {
-      final loadingMock = List.filled(
-        10,
-        PostEntity(
-          id: 1,
-          title: "Tiulo de prueba",
-          body: "comentario de prueba",
-        ),
-      );
       emit(
         state.copyWith(
           status: PostStatus.loading,
-          response: loadingMock,
-          searchResult: loadingMock,
+          response: useCase.mockLoader,
+          searchResult: useCase.mockLoader,
         ),
       );
       await Future.delayed(Duration(milliseconds: 500));

@@ -35,4 +35,9 @@ class PostUseCase {
     nuevaLista.sort((a, b) => a.id.compareTo(b.id));
     return nuevaLista;
   }
+
+  List<PostEntity> get mockLoader => List.filled(
+    10,
+    PostEntity(id: 1, title: "Tiulo de prueba", body: "comentario de prueba"),
+  );
 }
