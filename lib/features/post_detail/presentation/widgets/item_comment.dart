@@ -30,6 +30,7 @@ class ItemComment extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
 
                     children: [
+                      Text(comment.email, style: TextStyle(fontSize: 12)),
                       Text(
                         comment.name,
                         style: TextStyle(fontWeight: FontWeight.w900),

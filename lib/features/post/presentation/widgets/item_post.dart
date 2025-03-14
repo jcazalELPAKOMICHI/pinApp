@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_app/core/routes/app_route_import.dart';
+import 'package:pin_app/core/widgets/readmore.dart';
 import 'package:pin_app/features/post/presentation/bloc/post_bloc.dart';
 
 class ItemPost extends StatelessWidget {
@@ -53,10 +54,14 @@ class ItemPost extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 8),
-                        Text(
+                        ReadMoreText(
                           post.body.trim(),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
+                          trimLength: 100,
+                          trimLines: 2,
+                          trimCollapsedText: ' Ver más',
+                          trimExpandedText: ' Ver menos',
+
+                          colorClickableText: Colors.blue,
                         ),
                       ],
                     ),
