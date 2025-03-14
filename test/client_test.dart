@@ -1,38 +1,46 @@
+import 'package:flutter_test/flutter_test.dart' as test;
 import 'package:flutter_test/flutter_test.dart';
+import 'package:injectable/injectable.dart';
 import 'package:mockito/mockito.dart';
-import 'package:pin_app/core/http/pin_app_client.dart';
+import 'package:pin_app/core/injectable/config.dart';
 import 'package:pin_app/features/post/data/model/post_model.dart';
 import 'package:pin_app/features/post/data/repositories/remote_repository.dart';
 import 'package:pin_app/features/post/domain/repositories/post_repository.dart';
 
-class MockPinAppClient extends Mock implements PinAppClient {}
+@Environment("test")
+@Injectable(as: PostRepository)
+class MockRemoteRepository extends Mock implements RemoteRepository {}
 
 void main() {
-  late PostRepository repository;
+  late MockRemoteRepository repository;
 
-  late MockPinAppClient homeClient;
-  final List<PostModel> tArticles = List.filled(
-    10,
-    PostModel(id: 1, body: "body", title: "title", userId: 2),
-  );
-  setUp(() async {
-    homeClient = MockPinAppClient();
-    repository = RemoteRepository(client: homeClient);
+  test.setUpAll(() async {
+    configureDependencies();
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    repository = MockRemoteRepository();
   });
 
-  group('get posts', () {
-    test('should perform a GET request on /posts', () async {
-      // arrange
-      when(homeClient.getPost()).thenAnswer(
-        // #2
-        (realInvocation) async => tArticles,
-      );
+  test.group('get posts', () {
+    test.test('Retornando posts', () async {
+      Future<List<PostModel>> getList() async {
+        final List<PostModel> posts = List.filled(
+          10,
+          PostModel(id: 1, body: "body", title: "title", userId: 2),
+        );
 
-      // act
+        return Future.value(posts);
+      }
+
+      when(
+        repository.getAllPost(),
+      ).thenAnswer((realInvocation) async => getList());
+
       repository.getAllPost();
-      // assert
-      verify(() => homeClient.getPost());
-      verifyNoMoreInteractions(homeClient);
+
+      verify(() => repository.getAllPost());
+
+      verifyNoMoreInteractions(repository);
     });
   });
 }
