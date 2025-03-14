@@ -53,7 +53,7 @@ class PostSearch extends StatelessWidget implements PreferredSizeWidget {
                 builder: (context, state) {
                   return ThemeSwitcher.withTheme(
                     builder:
-                        (_, switcher, theme) => IconButton(
+                        (context, switcher, theme) => IconButton(
                           onPressed: () {
                             switcher.changeTheme(
                               theme:
