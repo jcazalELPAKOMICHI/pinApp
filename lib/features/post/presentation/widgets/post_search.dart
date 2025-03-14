@@ -60,18 +60,17 @@ class PostSearch extends StatelessWidget implements PreferredSizeWidget {
                                   !state.isDarkMode
                                       ? AppThemes.darkMode
                                       : AppThemes.lightMode,
-                              onAnimationFinish: () {
-                                if (state.isDarkMode) {
-                                  context.read<ThemeBloc>().add(
-                                    const ThemeEvent.switchLightMode(),
-                                  );
-                                } else {
-                                  context.read<ThemeBloc>().add(
-                                    const ThemeEvent.switchDarkMode(),
-                                  );
-                                }
-                              },
+                              onAnimationFinish: () {},
                             );
+                            if (state.isDarkMode) {
+                              context.read<ThemeBloc>().add(
+                                const ThemeEvent.switchLightMode(),
+                              );
+                            } else {
+                              context.read<ThemeBloc>().add(
+                                const ThemeEvent.switchDarkMode(),
+                              );
+                            }
                           },
                           icon: Icon(
                             !state.isDarkMode
