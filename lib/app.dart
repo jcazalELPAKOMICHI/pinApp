@@ -25,17 +25,17 @@ class App extends StatelessWidget {
           return ThemeProvider(
             initTheme:
                 state.isDarkMode ? AppThemes.darkMode : AppThemes.lightMode,
-            builder:
-                (_, myTheme) => MaterialApp(
-                  title: 'pinApp',
-                  debugShowCheckedModeBanner: false,
-                  theme: myTheme,
-                  themeMode:
-                      context.isDarkModeW ? ThemeMode.dark : ThemeMode.light,
-                  darkTheme: AppThemes.darkMode,
-                  onGenerateRoute: AppRoute.onGenerateRoute,
-                  initialRoute: '/',
-                ),
+            duration: Duration(milliseconds: 200),
+            child: MaterialApp(
+              title: 'pinApp',
+              debugShowCheckedModeBanner: false,
+              theme:
+                  state.isDarkMode ? AppThemes.darkMode : AppThemes.lightMode,
+              themeMode: context.isDarkModeW ? ThemeMode.dark : ThemeMode.light,
+              darkTheme: AppThemes.darkMode,
+              onGenerateRoute: AppRoute.onGenerateRoute,
+              initialRoute: '/',
+            ),
           );
         },
       ),

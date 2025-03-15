@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pin_app/core/extensions/theme_extension.dart';
 import 'package:pin_app/core/routes/app_route_import.dart';
 import 'package:pin_app/core/widgets/picture_dialog.dart';
 import 'package:pin_app/features/post/presentation/bloc/post_bloc.dart';
@@ -10,8 +9,6 @@ class HeaderPost extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final imageUrl =
-        'https://media.istockphoto.com/id/183285756/photo/waiting.jpg?s=612x612&w=0&k=20&c=SD1vv6goaFvQZo9ojhHqJpZ8vpLUVYxud5EBLMgSMlI=';
     return Column(
       mainAxisSize: MainAxisSize.min,
 
@@ -29,39 +26,47 @@ class HeaderPost extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap:
-                        () =>
-                            PictureDialog.showPictureDialog(context, imageUrl),
+                        () => PictureDialog.showPictureDialog(
+                          context,
+                          post.profilePicture!,
+                        ),
                     child: CircleAvatar(
-                      backgroundColor:
-                          context.isDarkModeR ? Colors.white : Colors.black,
-                      radius: 21,
+                      backgroundColor: Colors.grey,
+                      radius: 19,
                       child: CircleAvatar(
-                        backgroundImage: NetworkImage(imageUrl),
-                        radius: 20,
+                        backgroundImage: NetworkImage(post.profilePicture!),
+                        radius: 18,
+                        backgroundColor: Colors.grey,
                       ),
                     ),
                   ),
                   SizedBox(width: 8),
                   Text(
-                    '@Caroline',
+                    post.name!,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
                   ),
                 ],
               ),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    post.title.trim(),
+              SizedBox(
+                width: double.infinity,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      post.title.trim(),
 
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
-                  ),
-                  SizedBox(height: 8),
-                  Text(post.body.trim()),
-                ],
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Text(post.body.trim(), textAlign: TextAlign.start),
+                  ],
+                ),
               ),
             ],
           ),

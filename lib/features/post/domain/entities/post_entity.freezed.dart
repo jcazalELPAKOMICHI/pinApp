@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PostEntity {
 
- int get id; String get title; String get body; int? get favorite;
+ int get id; String get title; String get body; int? get favorite; String? get profilePicture; String? get name;
 /// Create a copy of PostEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,16 @@ $PostEntityCopyWith<PostEntity> get copyWith => _$PostEntityCopyWithImpl<PostEnt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PostEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.body, body) || other.body == body)&&(identical(other.favorite, favorite) || other.favorite == favorite));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PostEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.body, body) || other.body == body)&&(identical(other.favorite, favorite) || other.favorite == favorite)&&(identical(other.profilePicture, profilePicture) || other.profilePicture == profilePicture)&&(identical(other.name, name) || other.name == name));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,title,body,favorite);
+int get hashCode => Object.hash(runtimeType,id,title,body,favorite,profilePicture,name);
 
 @override
 String toString() {
-  return 'PostEntity(id: $id, title: $title, body: $body, favorite: $favorite)';
+  return 'PostEntity(id: $id, title: $title, body: $body, favorite: $favorite, profilePicture: $profilePicture, name: $name)';
 }
 
 
@@ -46,7 +46,7 @@ abstract mixin class $PostEntityCopyWith<$Res>  {
   factory $PostEntityCopyWith(PostEntity value, $Res Function(PostEntity) _then) = _$PostEntityCopyWithImpl;
 @useResult
 $Res call({
- int id, String title, String body, int? favorite
+ int id, String title, String body, int? favorite, String? profilePicture, String? name
 });
 
 
@@ -63,13 +63,15 @@ class _$PostEntityCopyWithImpl<$Res>
 
 /// Create a copy of PostEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? body = null,Object? favorite = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? body = null,Object? favorite = freezed,Object? profilePicture = freezed,Object? name = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,body: null == body ? _self.body : body // ignore: cast_nullable_to_non_nullable
 as String,favorite: freezed == favorite ? _self.favorite : favorite // ignore: cast_nullable_to_non_nullable
-as int?,
+as int?,profilePicture: freezed == profilePicture ? _self.profilePicture : profilePicture // ignore: cast_nullable_to_non_nullable
+as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -80,13 +82,15 @@ as int?,
 
 
 class _PostEntity implements PostEntity {
-  const _PostEntity({required this.id, required this.title, required this.body, this.favorite = 0});
+  const _PostEntity({required this.id, required this.title, required this.body, this.favorite = 0, this.profilePicture, this.name});
   
 
 @override final  int id;
 @override final  String title;
 @override final  String body;
 @override@JsonKey() final  int? favorite;
+@override final  String? profilePicture;
+@override final  String? name;
 
 /// Create a copy of PostEntity
 /// with the given fields replaced by the non-null parameter values.
@@ -98,16 +102,16 @@ _$PostEntityCopyWith<_PostEntity> get copyWith => __$PostEntityCopyWithImpl<_Pos
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PostEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.body, body) || other.body == body)&&(identical(other.favorite, favorite) || other.favorite == favorite));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PostEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.body, body) || other.body == body)&&(identical(other.favorite, favorite) || other.favorite == favorite)&&(identical(other.profilePicture, profilePicture) || other.profilePicture == profilePicture)&&(identical(other.name, name) || other.name == name));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,title,body,favorite);
+int get hashCode => Object.hash(runtimeType,id,title,body,favorite,profilePicture,name);
 
 @override
 String toString() {
-  return 'PostEntity(id: $id, title: $title, body: $body, favorite: $favorite)';
+  return 'PostEntity(id: $id, title: $title, body: $body, favorite: $favorite, profilePicture: $profilePicture, name: $name)';
 }
 
 
@@ -118,7 +122,7 @@ abstract mixin class _$PostEntityCopyWith<$Res> implements $PostEntityCopyWith<$
   factory _$PostEntityCopyWith(_PostEntity value, $Res Function(_PostEntity) _then) = __$PostEntityCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String title, String body, int? favorite
+ int id, String title, String body, int? favorite, String? profilePicture, String? name
 });
 
 
@@ -135,13 +139,15 @@ class __$PostEntityCopyWithImpl<$Res>
 
 /// Create a copy of PostEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? body = null,Object? favorite = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? body = null,Object? favorite = freezed,Object? profilePicture = freezed,Object? name = freezed,}) {
   return _then(_PostEntity(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,body: null == body ? _self.body : body // ignore: cast_nullable_to_non_nullable
 as String,favorite: freezed == favorite ? _self.favorite : favorite // ignore: cast_nullable_to_non_nullable
-as int?,
+as int?,profilePicture: freezed == profilePicture ? _self.profilePicture : profilePicture // ignore: cast_nullable_to_non_nullable
+as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

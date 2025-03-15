@@ -9,5 +9,7 @@ abstract class PostEntity with _$PostEntity {
     required String title,
     required String body,
     @Default(0) int? favorite,
+    String? profilePicture,
+    String? name,
   }) = _PostEntity;
 }

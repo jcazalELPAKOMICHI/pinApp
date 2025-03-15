@@ -11,6 +11,7 @@ abstract class PostDetailModel with _$PostDetailModel {
     required String name,
     required String email,
     required String body,
+    String? profileImage,
   }) = _PostDetailModel;
 
   factory PostDetailModel.fromJson(Map<String, Object?> json) =>

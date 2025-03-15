@@ -13,6 +13,7 @@ _PostDetailModel _$PostDetailModelFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       email: json['email'] as String,
       body: json['body'] as String,
+      profileImage: json['profileImage'] as String?,
     );
 
 Map<String, dynamic> _$PostDetailModelToJson(_PostDetailModel instance) =>
@@ -22,4 +23,5 @@ Map<String, dynamic> _$PostDetailModelToJson(_PostDetailModel instance) =>
       'name': instance.name,
       'email': instance.email,
       'body': instance.body,
+      'profileImage': instance.profileImage,
     };

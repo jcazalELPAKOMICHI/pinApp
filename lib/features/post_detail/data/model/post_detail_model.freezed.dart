@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PostDetailModel {
 
- int get postId; int get id; String get name; String get email; String get body;
+ int get postId; int get id; String get name; String get email; String get body; String? get profileImage;
 /// Create a copy of PostDetailModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $PostDetailModelCopyWith<PostDetailModel> get copyWith => _$PostDetailModelCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PostDetailModel&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.body, body) || other.body == body));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PostDetailModel&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.body, body) || other.body == body)&&(identical(other.profileImage, profileImage) || other.profileImage == profileImage));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,postId,id,name,email,body);
+int get hashCode => Object.hash(runtimeType,postId,id,name,email,body,profileImage);
 
 @override
 String toString() {
-  return 'PostDetailModel(postId: $postId, id: $id, name: $name, email: $email, body: $body)';
+  return 'PostDetailModel(postId: $postId, id: $id, name: $name, email: $email, body: $body, profileImage: $profileImage)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $PostDetailModelCopyWith<$Res>  {
   factory $PostDetailModelCopyWith(PostDetailModel value, $Res Function(PostDetailModel) _then) = _$PostDetailModelCopyWithImpl;
 @useResult
 $Res call({
- int postId, int id, String name, String email, String body
+ int postId, int id, String name, String email, String body, String? profileImage
 });
 
 
@@ -66,14 +66,15 @@ class _$PostDetailModelCopyWithImpl<$Res>
 
 /// Create a copy of PostDetailModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? postId = null,Object? id = null,Object? name = null,Object? email = null,Object? body = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? postId = null,Object? id = null,Object? name = null,Object? email = null,Object? body = null,Object? profileImage = freezed,}) {
   return _then(_self.copyWith(
 postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
 as int,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,body: null == body ? _self.body : body // ignore: cast_nullable_to_non_nullable
-as String,
+as String,profileImage: freezed == profileImage ? _self.profileImage : profileImage // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -84,7 +85,7 @@ as String,
 @JsonSerializable()
 
 class _PostDetailModel implements PostDetailModel {
-  const _PostDetailModel({required this.postId, required this.id, required this.name, required this.email, required this.body});
+  const _PostDetailModel({required this.postId, required this.id, required this.name, required this.email, required this.body, this.profileImage});
   factory _PostDetailModel.fromJson(Map<String, dynamic> json) => _$PostDetailModelFromJson(json);
 
 @override final  int postId;
@@ -92,6 +93,7 @@ class _PostDetailModel implements PostDetailModel {
 @override final  String name;
 @override final  String email;
 @override final  String body;
+@override final  String? profileImage;
 
 /// Create a copy of PostDetailModel
 /// with the given fields replaced by the non-null parameter values.
@@ -106,16 +108,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PostDetailModel&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.body, body) || other.body == body));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PostDetailModel&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.body, body) || other.body == body)&&(identical(other.profileImage, profileImage) || other.profileImage == profileImage));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,postId,id,name,email,body);
+int get hashCode => Object.hash(runtimeType,postId,id,name,email,body,profileImage);
 
 @override
 String toString() {
-  return 'PostDetailModel(postId: $postId, id: $id, name: $name, email: $email, body: $body)';
+  return 'PostDetailModel(postId: $postId, id: $id, name: $name, email: $email, body: $body, profileImage: $profileImage)';
 }
 
 
@@ -126,7 +128,7 @@ abstract mixin class _$PostDetailModelCopyWith<$Res> implements $PostDetailModel
   factory _$PostDetailModelCopyWith(_PostDetailModel value, $Res Function(_PostDetailModel) _then) = __$PostDetailModelCopyWithImpl;
 @override @useResult
 $Res call({
- int postId, int id, String name, String email, String body
+ int postId, int id, String name, String email, String body, String? profileImage
 });
 
 
@@ -143,14 +145,15 @@ class __$PostDetailModelCopyWithImpl<$Res>
 
 /// Create a copy of PostDetailModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? postId = null,Object? id = null,Object? name = null,Object? email = null,Object? body = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? postId = null,Object? id = null,Object? name = null,Object? email = null,Object? body = null,Object? profileImage = freezed,}) {
   return _then(_PostDetailModel(
 postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
 as int,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,body: null == body ? _self.body : body // ignore: cast_nullable_to_non_nullable
-as String,
+as String,profileImage: freezed == profileImage ? _self.profileImage : profileImage // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

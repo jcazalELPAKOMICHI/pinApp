@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pin_app/core/extensions/theme_extension.dart';
 import 'package:pin_app/core/routes/app_route_import.dart';
 import 'package:pin_app/core/widgets/picture_dialog.dart';
 import 'package:pin_app/core/widgets/readmore.dart';
@@ -10,9 +9,6 @@ class ItemPost extends StatelessWidget {
   final PostEntity post;
   @override
   Widget build(BuildContext context) {
-    final imageURL =
-        'https://media.istockphoto.com/id/183285756/photo/waiting.jpg?s=612x612&w=0&k=20&c=SD1vv6goaFvQZo9ojhHqJpZ8vpLUVYxud5EBLMgSMlI=';
-
     return Column(
       mainAxisSize: MainAxisSize.min,
 
@@ -30,15 +26,18 @@ class ItemPost extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap:
-                        () =>
-                            PictureDialog.showPictureDialog(context, imageURL),
+                        () => PictureDialog.showPictureDialog(
+                          context,
+                          post.profilePicture!,
+                        ),
                     child: CircleAvatar(
                       radius: 21,
-                      backgroundColor:
-                          context.isDarkModeR ? Colors.white : Colors.black,
+                      backgroundColor: Colors.grey,
+
                       child: CircleAvatar(
-                        backgroundImage: NetworkImage(imageURL),
+                        backgroundImage: NetworkImage(post.profilePicture!),
                         radius: 20,
+                        backgroundColor: Colors.grey,
                       ),
                     ),
                   ),
@@ -49,7 +48,7 @@ class ItemPost extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '@Caroline',
+                          post.name!,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: TextStyle(
