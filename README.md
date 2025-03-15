@@ -29,9 +29,6 @@ La aplicación tiene la opción de poder cambiar de light o dark mode para mayor
   - [Configuración Inicial](#configuración-inicial)
   - [Ejecución de la Aplicación](#ejecución-de-la-aplicación)
   - [Recursos Adicionales](#recursos-adicionales)
-- [Video de demostración](#video-de-demostración)
-  - [iOS](#ios)
-  - [Android](#android)
 
 ## Estructura del Proyecto
 
@@ -128,10 +125,6 @@ flutter test
 - [Ejemplos útiles en Flutter](https://github.com/flutter/samples)
 
 
-
-# Video de demostración
-## iOS
-![Descripción](player/ios-player.gif)  
-
-## Android
-![Descripción](player/android-player.gif)
+| Android  | iOS |
+| ------------- | ------------- |
+| ![Aplicación de Android](player/android-player.gif) | ![Descripción](player/ios-player.gif)    |
