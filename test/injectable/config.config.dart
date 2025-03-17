@@ -34,10 +34,6 @@ import 'package:pin_app/features/post_detail/domain/use_case/post_detail_use_cas
 import 'package:pin_app/features/post_detail/presentation/bloc/post_detail_bloc.dart'
     as _i448;
 
-import '../client_test.dart' as _i806;
-
-const String _test = 'test';
-
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
   _i174.GetIt testInit({
@@ -49,17 +45,7 @@ extension GetItInjectableX on _i174.GetIt {
     final clientModule = _$ClientModule();
     gh.factory<_i841.ThemeBloc>(() => _i841.ThemeBloc());
     gh.factory<_i955.IConfig>(() => _i955.AppConfig());
-    gh.factory<_i590.PostRepository>(
-      () => _i806.MockRemoteRepository(),
-      registerFor: {_test},
-    );
-    gh.factory<_i263.PostUseCase>(
-      () => _i263.PostUseCase(repository: gh<_i590.PostRepository>()),
-    );
     gh.singleton<_i361.Dio>(() => dioModule.dio(gh<_i955.IConfig>()));
-    gh.factory<_i521.PostBloc>(
-      () => _i521.PostBloc(useCase: gh<_i263.PostUseCase>()),
-    );
     gh.factory<_i599.PostDetailRepository>(
       () => _i201.PostDetailRepositoryIml(dio: gh<_i361.Dio>()),
     );
@@ -75,6 +61,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i590.PostRepository>(
       () => _i382.RemoteRepository(client: gh<_i847.PinAppClient>()),
+    );
+    gh.factory<_i263.PostUseCase>(
+      () => _i263.PostUseCase(repository: gh<_i590.PostRepository>()),
+    );
+    gh.factory<_i521.PostBloc>(
+      () => _i521.PostBloc(useCase: gh<_i263.PostUseCase>()),
     );
     return this;
   }
