@@ -23,6 +23,26 @@ jobs:
         with:
           channel: stable
           version: 3.29.0
+          cache: true # Activa el caché nativo de flutter-action
+          
+      - name: Cache Flutter dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.pub-cache
+          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-flutter-
+
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/build.gradle', '**/build.gradle.kts') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-          
       - uses: actions/setup-java@v4
         with:
           distribution: 'zulu' # See 'Supported distributions' for available options
@@ -36,4 +56,9 @@ jobs:
 
       - name: Build APK
         run:  flutter build apk --release
+        
+      - uses: actions/upload-artifact@v4
+        with:
+          name: android-apk
+          path: build/app/outputs/flutter-apk/app-release.apk     
 
