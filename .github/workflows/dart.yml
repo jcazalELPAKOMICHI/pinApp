@@ -50,6 +50,30 @@ jobs:
           distribution: 'zulu' # See 'Supported distributions' for available options
           java-version: '17.0.14'
           
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+        
+      - name: Cache NDK
+        uses: actions/cache@v3
+        with:
+          path: $ANDROID_HOME/ndk/27.0.12077973
+          key: ${{ runner.os }}-ndk-27.0.12077973
+          restore-keys: |
+            ${{ runner.os }}-ndk-
+            
+      - name: Install NDK
+        run: |
+          if [ ! -d "$ANDROID_HOME/ndk/27.0.12077973" ]; then
+            yes | sdkmanager --install "ndk;27.0.12077973"
+            yes | sdkmanager --install "cmake;3.22.1"
+          fi
+
+      - name: Set NDK path
+        run: echo "NDK_HOME=$ANDROID_HOME/ndk/27.0.12077973" >> $GITHUB_ENV
+
+      - name: Verify NDK installation
+        run: ls -la $NDK_HOME
+        
       - name: Install dependencies
         run: flutter pub get
       
