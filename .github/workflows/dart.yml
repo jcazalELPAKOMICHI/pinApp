@@ -3,14 +3,15 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Dart
+name: Build Android APK
 
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
+    
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,11 +27,12 @@ jobs:
           cache: true # Activa el caché nativo de flutter-action
           
       - name: Cache Flutter dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/.pub-cache
-          key: ${{ runner.os }}-flutter-${{ hashFiles('pubspec.yaml') }}
+            .flutter-plugins-dependencies
+          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
           restore-keys: |
             ${{ runner.os }}-flutter-
 
